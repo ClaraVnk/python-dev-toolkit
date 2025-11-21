@@ -13,12 +13,28 @@ Un ensemble d'outils et de configurations standardisées pour le développement 
 
 ## 🚀 Installation rapide
 
+### Via PyPI (recommandé)
+
+```bash
+# Installer le package avec les outils de développement
+pip install devtools-claravnk[dev]
+```
+
+Cette commande installe automatiquement :
+
+- Black (formatage)
+- isort (tri des imports)
+- flake8 (linting)
+- Bandit (sécurité)
+
+### Via script d'installation
+
 ```bash
 # Dans votre projet Python
 curl -sSL https://raw.githubusercontent.com/ClaraVnk/python-dev-toolkit/main/install.sh | bash
 ```
 
-Ou manuellement :
+### Installation manuelle
 
 ```bash
 # Cloner le repo
