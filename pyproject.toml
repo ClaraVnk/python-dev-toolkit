@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-dev-toolkit"
-version = "0.1.0"  # Mettez à jour cette version avant chaque release
+version = "1.0.0"  
 description = "Un ensemble d'outils et de configurations standardisées pour le développement Python"
 readme = "README.md"
 requires-python = ">=3.9"
