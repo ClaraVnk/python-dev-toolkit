@@ -1,0 +1,56 @@
+# Makefile template pour projets Python
+# Copiez ce fichier dans votre projet et renommez-le en "Makefile"
+
+.PHONY: help install dev-install format lint security check clean
+
+help:
+	@echo "🛠️ Python Dev Toolkit - Commandes de développement"
+	@echo ""
+	@echo "Installation:"
+	@echo "  make install      - Installer le projet"
+	@echo "  make dev-install  - Installer avec les outils de dev"
+	@echo ""
+	@echo "Workflow de développement:"
+	@echo "  make format       - Formater le code (isort + black)"
+	@echo "  make lint         - Vérifier le style (flake8)"
+	@echo "  make security     - Vérifier la sécurité (bandit)"
+	@echo "  make check        - Tout vérifier (format + lint + security)"
+	@echo ""
+	@echo "Nettoyage:"
+	@echo "  make clean        - Nettoyer les fichiers temporaires"
+
+install:
+	pip install -e .
+
+dev-install:
+	pip install -e ".[dev]"
+
+format:
+	@echo "📝 Organisation des imports avec isort..."
+	python3 -m isort src/
+	@echo "🎨 Formatage du code avec black..."
+	python3 -m black src/
+	@echo "✅ Formatage terminé!"
+
+lint:
+	@echo "🔍 Vérification du style avec flake8..."
+	python3 -m flake8 src/ --max-line-length=88 --extend-ignore=E203,W503,E501,F401,F841
+	@echo "✅ Vérification terminée!"
+
+security:
+	@echo "🔒 Analyse de sécurité avec bandit..."
+	python3 -m bandit -r src/ -f screen
+	@echo "✅ Analyse de sécurité terminée!"
+
+check: format lint security
+	@echo "✅ Toutes les vérifications sont terminées!"
+
+clean:
+	@echo "🧹 Nettoyage des fichiers temporaires..."
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete
+	find . -type f -name "*.pyo" -delete
+	find . -type f -name "*.log" -delete
+	rm -rf .pytest_cache .mypy_cache .ruff_cache .coverage htmlcov/
+	rm -rf build/ dist/ *.egg-info/
+	@echo "✅ Nettoyage terminé!"
